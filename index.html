@@ -12,33 +12,28 @@
   <div id="todoapp">
 
     <header>
-      <h1>Todos</h1>
-      <input id="new-todo" type="text" placeholder="What needs to be done?">
+      <h1>Terms (and definitions)</h1>
+      <input id="new-todo" type="text" placeholder="Add new term">
     </header>
 
     <section id="main">
       <input id="toggle-all" type="checkbox">
-      <label for="toggle-all">Mark all as complete</label>
+      <label for="toggle-all">Mark all as learned</label>
       <ul id="todo-list"></ul>
     </section>
 
     <footer>
-      <a id="clear-completed">Clear completed</a>
+      <a id="clear-learned">Clear learned</a>
       <div id="todo-count"></div>
     </footer>
 
   </div>
 
   <div id="instructions">
-    Double-click to edit a todo.
+    Double-click to edit a card.
   </div>
 
-  <div id="credits">
-    Created by
-    <br />
-    <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
-    <br />Rewritten by: <a href="http://addyosmani.github.com/todomvc">TodoMVC</a>.
-  </div>
+  
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -60,7 +55,7 @@
 
   <script type="text/template" id="stats-template">
     <% if (done) { %>
-      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+      <a id="clear-learned">Clear <%= done %> learned <%= done == 1 ? 'item' : 'items' %></a>
     <% } %>
     <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
   </script>

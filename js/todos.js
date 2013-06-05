@@ -150,11 +150,11 @@ $(function(){
     // Our template for the line of statistics at the bottom of the app.
     statsTemplate: _.template($('#stats-template').html()),
 
-    // Delegated events for creating new items, and clearing completed ones.
+    // Delegated events for creating new items, and clearing learned ones.
     events: {
       "keypress #new-todo":  "createOnEnter",
-      "click #clear-completed": "clearCompleted",
-      "click #toggle-all": "toggleAllComplete"
+      "click #clear-learned": "clearLearned",
+      "click #toggle-all": "toggleAllLearned"
     },
 
     // At initialization we bind to the relevant events on the `Todos`
@@ -216,12 +216,12 @@ $(function(){
     },
 
     // Clear all done todo items, destroying their models.
-    clearCompleted: function() {
+    clearLearned: function() {
       _.invoke(Todos.done(), 'destroy');
       return false;
     },
 
-    toggleAllComplete: function () {
+    toggleAllLearned: function () {
       var done = this.allCheckbox.checked;
       Todos.each(function (todo) { todo.save({'done': done}); });
     }
