@@ -3,28 +3,28 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Backbone.js Todos</title>
+  <title>Backbone.js Cards</title>
   <link rel="stylesheet" href="css/todos.css"/>
 </head>
 
 <body>
 
-  <div id="todoapp">
+  <div id="cardapp">
 
     <header>
       <h1>Terms (and definitions)</h1>
-      <input id="new-todo" type="text" placeholder="Add new term">
+      <input id="new-card" type="text" placeholder="Add new term">
     </header>
 
     <section id="main">
       <input id="toggle-all" type="checkbox">
       <label for="toggle-all">Mark all as learned</label>
-      <ul id="todo-list"></ul>
+      <ul id="card-list"></ul>
     </section>
 
     <footer>
       <a id="clear-learned">Clear learned</a>
-      <div id="todo-count"></div>
+      <div id="card-count"></div>
     </footer>
 
   </div>
@@ -47,17 +47,17 @@
   <script type="text/template" id="item-template">
     <div class="view">
       <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-      <label><%- title %></label>
+      <label><%- term %></label>
       <a class="destroy"></a>
     </div>
-    <input class="edit" type="text" value="<%- title %>" />
+    <input class="edit" type="text" value="<%- term %>" />
   </script>
 
   <script type="text/template" id="stats-template">
     <% if (done) { %>
       <a id="clear-learned">Clear <%= done %> learned <%= done == 1 ? 'item' : 'items' %></a>
     <% } %>
-    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+    <div class="card-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
   </script>
 
   </body>
