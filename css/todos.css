@@ -78,7 +78,7 @@ body {
 	border-bottom: none;
 }
 
-#card-list li.done label {
+#card-list li.learned label {
 	color: #777777;
 	text-decoration: line-through;
 }

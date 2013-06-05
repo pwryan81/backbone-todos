@@ -46,7 +46,7 @@
 
   <script type="text/template" id="item-template">
     <div class="view">
-      <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+      <input class="toggle" type="checkbox" <%= learned ? 'checked="checked"' : '' %> />
       <label><%- term %></label>
       <a class="destroy"></a>
     </div>
@@ -54,8 +54,8 @@
   </script>
 
   <script type="text/template" id="stats-template">
-    <% if (done) { %>
-      <a id="clear-learned">Clear <%= done %> learned <%= done == 1 ? 'item' : 'items' %></a>
+    <% if (learned) { %>
+      <a id="clear-learned">Clear <%= learned %> learned <%= learned == 1 ? 'item' : 'items' %></a>
     <% } %>
     <div class="card-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
   </script>

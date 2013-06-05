@@ -9,7 +9,7 @@ $(function(){
   // Card Model
   // ----------
 
-  // Our basic **Card** model has `term`, `order`, and `done` attributes.
+  // Our basic **Card** model has `term`, `order`, and `learned` attributes.
   var Card = Backbone.Model.extend({
 
     // Default attributes for the card item.
@@ -17,13 +17,13 @@ $(function(){
       return {
         term: "empty card...",
         order: Cards.nextOrder(),
-        done: false
+        learned: false
       };
     },
 
-    // Toggle the `done` state of this card item.
+    // Toggle the `learned` state of this card item.
     toggle: function() {
-      this.save({done: !this.get("done")});
+      this.save({learned: !this.get("learned")});
     }
 
   });
@@ -42,13 +42,13 @@ $(function(){
     localStorage: new Backbone.LocalStorage("cards-backbone"),
 
     // Filter down the list of all card items that are finished.
-    done: function() {
-      return this.where({done: true});
+    learned: function() {
+      return this.where({learned: true});
     },
 
     // Filter down the list to only card items that are still not finished.
     remaining: function() {
-      return this.without.apply(this, this.done());
+      return this.without.apply(this, this.learned());
     },
 
     // We keep the Cards in sequential order, despite being saved by unordered
@@ -80,7 +80,7 @@ $(function(){
 
     // The DOM events specific to an item.
     events: {
-      "click .toggle"   : "toggleDone",
+      "click .toggle"   : "toggleLearned",
       "dblclick .view"  : "edit",
       "click a.destroy" : "clear",
       "keypress .edit"  : "updateOnEnter",
@@ -98,13 +98,13 @@ $(function(){
     // Re-render the titles of the card item.
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
-      this.$el.toggleClass('done', this.model.get('done'));
+      this.$el.toggleClass('learned', this.model.get('learned'));
       this.input = this.$('.edit');
       return this;
     },
 
-    // Toggle the `"done"` state of the model.
-    toggleDone: function() {
+    // Toggle the `"learned"` state of the model.
+    toggleLearned: function() {
       this.model.toggle();
     },
 
@@ -178,13 +178,13 @@ $(function(){
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
     render: function() {
-      var done = Cards.done().length;
+      var learned = Cards.learned().length;
       var remaining = Cards.remaining().length;
 
       if (Cards.length) {
         this.main.show();
         this.footer.show();
-        this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
+        this.footer.html(this.statsTemplate({learned: learned, remaining: remaining}));
       } else {
         this.main.hide();
         this.footer.hide();
@@ -215,15 +215,15 @@ $(function(){
       this.input.val('');
     },
 
-    // Clear all done card items, destroying their models.
+    // Clear all learned card items, destroying their models.
     clearLearned: function() {
-      _.invoke(Cards.done(), 'destroy');
+      _.invoke(Cards.learned(), 'destroy');
       return false;
     },
 
     toggleAllLearned: function () {
-      var done = this.allCheckbox.checked;
-      Cards.each(function (card) { card.save({'done': done}); });
+      var learned = this.allCheckbox.checked;
+      Cards.each(function (card) { card.save({'learned': learned}); });
     }
 
   });
